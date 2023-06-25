@@ -8,7 +8,7 @@ interface Props {
 }
 
 const CalcRow = ({ category, ...restProps }: Props & React.HTMLAttributes<HTMLDivElement>) => {
-  const cls = classnames(styles.cell, styles.calcRow);
+  const cls = classnames(styles.cell, styles.calcCell);
   const calculatedSections = useStore(store => store.calculatedSections);
   const cells = calculatedSections[category.id];
   if (!cells) {
@@ -23,7 +23,7 @@ const CalcRow = ({ category, ...restProps }: Props & React.HTMLAttributes<HTMLDi
     <div key={`${category.id}_calc_${idx}`} className={cls}>{val}</div>
   ));
 
-  return (<div className={styles.row} {...restProps}>
+  return (<div className={styles.calcRow} {...restProps}>
     {renderedCells}
   </div>);
 };

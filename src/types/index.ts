@@ -1,8 +1,5 @@
 import { ReportSection, Transaction } from '@/lib/_api';
 
-export type Sign = -1 | 1;
-export type CategoryType = 'data' | 'profit' | 'netincome';
-
 export type CellValue = number | null;
 
 export type CellId = {

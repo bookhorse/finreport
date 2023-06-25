@@ -10,13 +10,15 @@ const useSelectionData = () => {
     const columnIdx = report.columns.findIndex(el => el.id === selectedCell.columnId);
     const column = report.columns[columnIdx];
     const section = report.sections.find(el => el.id === selectedCell.sectionId);
+    const category = report.categories.find(el => el.id === section?.category);
 
-    if (!section || !column) return null;
+    if (!section || !column || !category) return null;
     const transactions = section.data[columnIdx].transactions;
 
     return {
       column,
       section,
+      category,
       transactions
     };
   }, [report, selectedCell]);

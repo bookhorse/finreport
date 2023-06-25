@@ -8,9 +8,10 @@ import { Transaction } from '@/lib/_api';
 interface Props {
   transaction: Transaction;
   cell: CellId;
+  sign: number;
 }
 
-const TransactionItem = ({transaction, cell}: Props) => {
+const TransactionItem = ({transaction, cell, sign}: Props) => {
   const {date, name, value} = transaction;
   const [{ isDragging }, dragRef] = useDrag(
     () => ({
@@ -36,7 +37,7 @@ const TransactionItem = ({transaction, cell}: Props) => {
       <div className={styles.transactionDate}>{date}</div>
       <div className={styles.spaceBetween}>
         <div>{name}</div>
-        <div>{value}</div>
+        <div>{value * sign}</div>
       </div>
     </div>
   );

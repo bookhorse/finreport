@@ -73,17 +73,24 @@ export const calcSections = (report: FinancialReport): CalculatedSection => {
   const { categories, sections } = report;
   const ret = {} as CalculatedSection;
 
-  const pickSection = (categoryId: string) => sections.find(el => el.category === categoryId);
-  const sectionToValues = (section?: ReportSection) => {
-    if (!section) return null;
-    return section.data.map(el => el.value);
+  const pickSections = (categoryId: string) => sections.filter(el => el.category === categoryId);
+
+  const sectionToValues = (sections: ReportSection[]) => {
+    if (!sections.length) return null;
+    const rawData = sections.map(section => section.data.map(el => el.value && el.value));
+
+    const totals = rawData.reduce((acc, cur) => {
+      return acc.map((val, idx) => (val ?? 0) + (cur[idx] ?? 0));
+    });
+    return totals;
   };
 
   categories.forEach(category => {
     switch (category.type) {
       case 'profit': {
-        const incomeSection = sectionToValues(pickSection('income'));
-        const cogsSection = sectionToValues(pickSection('cogs'));
+        const incomeSection = sectionToValues(pickSections('income'));
+        const cogsSection = sectionToValues(pickSections('cogs'));
+
         if (incomeSection && cogsSection) {
           ret.profit = processCells(incomeSection, cogsSection, minusOp);
         }
@@ -91,7 +98,7 @@ export const calcSections = (report: FinancialReport): CalculatedSection => {
       }
       case 'netincome': {
         const profitValues = ret.profit;
-        const expensesSection = sectionToValues(pickSection('expenses'));
+        const expensesSection = sectionToValues(pickSections('expenses'));
         if (profitValues && expensesSection) {
           ret.netincome = processCells(profitValues, expensesSection, minusOp);
         }

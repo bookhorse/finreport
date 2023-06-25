@@ -22,7 +22,7 @@ const initialState = {
   report: null,
   selectedCell: null,
   calculatedSections: {},
-  expandedCategories: ['banks', 'expenses', 'cogs', 'income']
+  expandedCategories: []
 };
 
 const useStore = create<Store>()((set, get) => ({
@@ -38,7 +38,9 @@ const useStore = create<Store>()((set, get) => ({
     const { setReport } = get();
     const response = await Api.report.getCurrentReport();
     if (response.ok) {
-      setReport(response.data);
+      const report = response.data;
+      setReport(report);
+      set({ expandedCategories: report.categories.map(el => el.id) }); //expand all
     }
   },
   recalculateSections: () => {

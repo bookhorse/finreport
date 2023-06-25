@@ -1,24 +1,24 @@
 import { faker } from '@faker-js/faker';
 import dayjs from 'dayjs';
 import { round } from '@/utils';
-import { Category, CellData, Column, FinancialReport, Transaction } from './_api';
+import { CellData, Column, FinancialReport, Transaction } from './_api';
 
 const dateFormat = 'MMM YYYY';
 
-type Sign = Category['sign'];
-
 export const produceMockReport = ({ columnsToMake = 6, sectionsToMake = 3 }) => {
 
-  const makeData = (name: string, columns: Column[], sign: Sign) => {
+  const makeData = (name: string, columns: Column[]) => {
     const ret = [] as CellData[];
     for (let i = 0; i < columnsToMake; i++) {
       const transactionCount = faker.number.int(3);
       const transactions = [] as Transaction[];
       let total = 0;
+      const startDate = columns[i].date;
 
       for (let i = 0; i < transactionCount; ++i) {
-        const val = faker.number.float({ min: 1, max: 500, precision: 0.1 }) * sign;
-        const date = dayjs(columns[i].date)
+        const val = faker.number.float({ min: 1, max: 500, precision: 0.1 });
+        const date = dayjs(startDate)
+          .startOf('month')
           .add(faker.number.int(28), 'day')
           .format(dateFormat);
 
@@ -65,7 +65,7 @@ export const produceMockReport = ({ columnsToMake = 6, sectionsToMake = 3 }) => 
         id: `${categoryName}_${idx}`,
         name,
         category: categoryName,
-        data: makeData(name, report.columns, category.sign)
+        data: makeData(name, report.columns)
       };
     });
 
@@ -76,7 +76,7 @@ export const produceMockReport = ({ columnsToMake = 6, sectionsToMake = 3 }) => 
     categories: [
       { id: 'banks', name: 'Banks', position: 0, sign: 1, type: 'data' },
       { id: 'income', name: 'Income', position: 1, sign: 1, type: 'data' },
-      { id: 'cogs', name: 'Cost of Goods Sold', position: 2, sign: 1, type: 'data' },
+      { id: 'cogs', name: 'Cost of Goods Sold', position: 2, sign: -1, type: 'data' },
       { id: 'profit', name: 'Gross profit', position: 3, sign: 1, type: 'profit' },
       { id: 'expenses', name: 'Expenses', position: 4, sign: -1, type: 'data' },
       { id: 'netincome', name: 'Net income', position: 5, sign: 1, type: 'netincome' },

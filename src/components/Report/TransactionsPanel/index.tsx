@@ -12,12 +12,13 @@ const TransactionsPanel = () => {
 
   if (!selectedCell || !selection) return null;
 
-  const {column, section, transactions} = selection;
+  const {column, category, section, transactions} = selection;
 
   const renderedTransactions = transactions.map((el) => (
     <TransactionItem
       key={el.id}
       transaction={el}
+      sign={category.sign}
       cell={selectedCell}
     />
   ));
