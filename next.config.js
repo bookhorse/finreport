@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 
-const isDemo = !!process.env.PRODUCE_DEMO;
+const isGithubActions = process.env.GITHUB_ACTIONS || false;
 const demoRoot = '/finreport/gitpages/demo';
 
 const nextConfig = {
   output: 'export',
-  basePath: isDemo? demoRoot : '',
-  assetPrefix: isDemo? demoRoot : '',
+  basePath: isGithubActions? demoRoot : '',
+  assetPrefix: isGithubActions? demoRoot : '',
   reactStrictMode: true,
   webpack: (config, _options) => {
     config.module.rules.push({
