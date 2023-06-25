@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
+
+const isDemo = !!process.env.PRODUCE_DEMO;
+const demoRoot = '/finreport/gitpages/demo';
+
 const nextConfig = {
   output: 'export',
+  basePath: isDemo? demoRoot : '',
   reactStrictMode: true,
   webpack: (config, _options) => {
     config.module.rules.push({
