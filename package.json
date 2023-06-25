@@ -1,0 +1,42 @@
+{
+  "name": "finreport",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "generate:api": "swagger-typescript-api -p openapi.yaml -o ./src/lib/ --union-enums -n _api.ts && dos2unix src/lib/_api.ts"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "@types/lodash": "^4.14.192",
+    "@types/node": "18.15.5",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "classnames": "^2.3.2",
+    "dayjs": "^1.11.8",
+    "dos2unix-cli": "^1.0.1",
+    "eslint": "8.36.0",
+    "eslint-config-next": "13.2.4",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "lodash": "^4.17.21",
+    "next": "13.2.4",
+    "prettier": "^2.8.7",
+    "react": "18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "18.2.0",
+    "sass": "^1.60.0",
+    "swagger-typescript-api": "^12.0.4",
+    "typescript": "5.0.2",
+    "zustand": "^4.3.8"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^1.0.0-beta.128",
+    "@svgr/webpack": "^7.0.0"
+  }
+}
