@@ -1,7 +1,7 @@
-Financial report
+Financial report\
 
-Swagger API docs: [swagger api](https://bookhorse.github.io/finreport/swagger)
-Live demo with random data: [live demo](https://bookhorse.github.io/finreport/demo)
+Swagger API docs: [swagger api](https://bookhorse.github.io/finreport/swagger)\
+Live demo with random data: [live demo](https://bookhorse.github.io/finreport/demo)\
 
 To run the development server:
 
