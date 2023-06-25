@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const isGithubActions = process.env.GITHUB_ACTIONS || false;
-const demoRoot = '/finreport/gitpages/demo';
+const demoRoot = '/finreport/demo';
 
 const nextConfig = {
   output: 'export',
