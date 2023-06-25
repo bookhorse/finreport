@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "generate:api": "swagger-typescript-api -p openapi.yaml -o ./src/lib/ --union-enums -n _api.ts && dos2unix src/lib/_api.ts",
-    "generate:demo": "PRODUCE_DEMO=1 yarn build && yarn run next export -o gitpages/demo && touch gitpages/demo/.nojekyll"
+    "generate:demo": "PRODUCE_DEMO=1 yarn build && yarn run next export -o gitpages/demo && touch gitpages/demo/_next/.nojekyll"
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
